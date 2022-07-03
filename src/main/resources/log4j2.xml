@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration xmlns="http://logging.apache.org/log4j/2.0/config">
+    <Properties>
+        <Property name="PATTERN">%d{yyyy-MMM-dd HH:mm:ss} [%t] %-5level %-50c{1.} - %m%n</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="File" fileName="app.log"
+            filePattern="app-%d{dd-MM-yyyy}.log">
+            <PatternLayout pattern="${PATTERN}}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>
